@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+
+ <h1>{{blog.title}}</h1>
+ {{blog.writer}}<br>
+ {{blog.pub_date}}<br>
+ <hr>
+ {% if blog.image %}
+ <p><img src="{{blog.image.url}}" alt=""></p>
+ {% endif %}
+ {{blog.body}}<br>
+
+ <br>
+ <br>
+ <button type="button" class="btn btn-dark">
+    <a id="buttontext" href="{%url 'edit' blog.id %}">수정하기</a><br>
+ </button>
+
+ <button type="button" class="btn btn-dark">
+    <a  id="buttontext" href="{%url 'delete' blog.id %}">삭제하기</a><br>
+ </button>
+
+ <br><br>
+
+
+{% for comment in commments %}
+<br>
+<hr>
+<p>작성자 : {{comment.writer}} </p>
+<p>내용 : {{comment.body}} </p>
+
+<div>
+    {% for re_comment in re_comments %}
+        {% if comment == re_comment.comment_id %}
+        <p>작성자 : {{re_comment.writer}}</p>
+        <p>내용 : {{re_comment.body}}</p><br>
+        {% endif %}
+    {% endfor %}
+    <span onclick='showCommentForm(this)' value="{{comment.id}}">답댓글 쓰기</span>
+    <div id="re_comment_form{{comment.id}}"></div>
+</div>
+
+{% endfor %}
+ 
+ {% endblock %}

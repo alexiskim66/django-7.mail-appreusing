@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>메일 보내기</h1>
+
+<form action="{% url 'email' %}" method="post" enctype="multipart/form-data">
+    {%csrf_token%}
+    {{contact_form.as_p}}
+    <button type="submit">메일 전송하기</button>
+</form>
+
+
+{% endblock %}

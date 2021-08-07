@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+{% if user.is_authenticated %}
+<div id="userid">
+    {{user.username}} 님 반갑습니다!
+</div>
+{% endif %}
+
+<div id="title">
+    <h1>MyMessenger</h1>
+    <img id="logo" src="{% static 'chatting.png' %}">이곳은 일기를 올리고 이메일과 메세지를 주고받는 공간입니다.
+</div>
+
+<br>
+
+일기 간략하게 모아보기
+    {% for blog in blogs %}
+    <div id="post">
+      날짜 : {{blog.title}}<br>
+      작성자 : {{blog.writer}}<br>
+      {{blog.summary}}
+      <br>
+      <button type="button" class="btn btn-dark">
+      <a id="buttontext" href="{%url 'detail' blog.id %}">더 읽어보기</a>
+     </button><br>
+    </div>
+    {% endfor %}
+
+
+  
+
+{% endblock %}
